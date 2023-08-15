@@ -28,7 +28,9 @@ The top-ranked sentences based on their TF-IDF scores are selected to produce th
 
 ## File Structure
 
-The config.yaml file contains various configuration parameters that control the behavior of the summarization * __src__: Contains the main Python script (main.py) for the project.
+The config.yaml file contains various configuration parameters that control the behavior of the summarization:
+
+* __src__: Contains the main Python script (main.py) for the project.
 * __data__: Houses the textual content (content.txt) that needs to be summarized.
 
 
