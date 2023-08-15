@@ -58,10 +58,13 @@ Also, ensure that the NLTK corpora for stopwords is downloaded:
 
 To generate a summary using the default configurations:
 ### 1. Navigate to the src directory.
-### 2. Run the main.py script:
 
 ```bash
   cd src
+```
+### 2. Run the main.py script:
+
+```bash
   python main.py
 ```
 ## Examples
