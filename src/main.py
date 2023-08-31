@@ -1,7 +1,6 @@
 from collections import defaultdict
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
-from gensim.corpora.dictionary import Dictionary
 import re
 import os
 import math
@@ -19,13 +18,11 @@ class Summary():
         self.content = ""
         self.cleaned_text = ""
         self.sent_count = ""
-        self.__corpus = None
-        self.__token_corpus_id_count = None
-        self.__token_doc_id_count = None
-        self.__token_doc_id_score = None
-        self.__doc_score = None
-        self.__sentence_score = None
+        self.__doc_token_freq = None
+        self.__sent_token_freq = None
+        self.__sent_filtered_tokens = None
         self.__sentences = None
+        self.__scored_Sentences = None
 
     def _get_sentences(self, text):
         sentences = sent_tokenize(text)
@@ -43,29 +40,34 @@ class Summary():
         return token.isalnum() and token not in stopwords.words('english')
 
     def _filter_tokens(self, doc_tokens):
-        return [token for token in doc_tokens if self._valid_token(token)]
+        return [token.lower().strip() for token in doc_tokens if self._valid_token(token)]
+
+    def _build_freq_dictionary(self):
+        self.__doc_token_freq = defaultdict(int)
+        self.__sent_token_freq = defaultdict(int)
+
+        for sent in self.__sent_filtered_tokens:
+            current = []
+            for token in sent:
+                self.__doc_token_freq[token]+=1
+                current.append(token)
+            for token in list(set(current)):
+                self.__sent_token_freq[token]+=1
+
 
     def _get_corpus(self):
-        all_tokens = [word_tokenize(sent) for sent in self.sentences]
-        filtered_tokens = [self._filter_tokens(doc_tokens) for doc_tokens in all_tokens]
-        dictionary = Dictionary(filtered_tokens)
-        self.__token_doc_id_count = [dictionary.doc2bow(doc) for doc in filtered_tokens]
-        self.__token_corpus_id_count = defaultdict(int)
-        for doc in self.__token_doc_id_count:
-            seen = []
-            for token_id, count in doc:
-                if token_id in seen:
-                    continue
-                seen.append(token_id)
-                self.__token_corpus_id_count[token_id] += 1
+        sent_tokens = [word_tokenize(sent) for sent in self.sentences]
+        self.__sent_filtered_tokens = [self._filter_tokens(doc_tokens) for doc_tokens in sent_tokens]
+        self._build_freq_dictionary()
 
-    def _cal_doc_id_score(self):
+    def _cal_sent_score(self):
         self.__doc_score = []
-        for ind, doc in enumerate(self.__token_doc_id_count):
+        for ind, sent in enumerate(self.__sent_filtered_tokens):
             total_score = 0
-            for token_id, count in doc:
-                w = count * math.log(len(self.sentences)/self.__token_corpus_id_count[token_id])
-                total_score += w
+            for token in sent:
+                tf = self.__doc_token_freq[token]/len(self.sentences)
+                idf = math.log(len(self.sentences)/(self.__sent_token_freq[token] + 1))
+                total_score += (tf * idf)
             self.__doc_score.append((ind, total_score))
         self.__sentence_score = []
         for ind, score in self.__doc_score:
@@ -104,7 +106,7 @@ class Summary():
             raise MyException("The Content is too short less than 5 sentences!")
             return ""
         self._get_corpus()
-        self._cal_doc_id_score()
+        self._cal_sent_score()
         return self._get_summary_sentences()
 
 

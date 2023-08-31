@@ -92,9 +92,7 @@ Fructose does this by lowering the concentration of the body's main energy curre
 
 Summary is:- 
 
-Fructose turns out to have a very powerful way to activate a biological switch that activates a range of processes that includes hunger, eating, leptin resistance—the satiety hormone—and a series of events that make you want to store fat, Johnson said. 
-Most of the fructose we have comes from high-fructose corn syrup and table sugar and added sugar, which are made of glucose and fructose, Richard Johnson, a professor of medicine at the University of Colorado Anschutz Medical Campus, told Newsweek. 
-This common sugar has been shown to flick a metabolic switch in our bodies that increases our hunger, thirst and fat accumulation, as well as insulin resistance, systemic inflammation and increased blood pressure. Actual fruits contain so many things besides fructose that are good for us, like potassium and vitamin C, fiber which slows absorption, and the flavanols which can actually counter the effect of fructose.
+Most of the fructose we have comes from high-fructose corn syrup and table sugar and added sugar, which are made of glucose and fructose, Richard Johnson, a professor of medicine at the University of Colorado Anschutz Medical Campus, told Newsweek. When you eat moderate amounts of fructose in natural fruit, the body deactivates the fructose so you don't get a lot of the sugar going into your system, Johnson said. Fructose turns out to have a very powerful way to activate a biological switch that activates a range of processes that includes hunger, eating, leptin resistance—the satiety hormone—and a series of events that make you want to store fat, Johnson said. And likewise if you drink fruit juice, you can get a lot of concentrated fructose because you get, like, five or six fruits combined into one glass.
 
 
 ## Improve
